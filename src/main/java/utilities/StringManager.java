@@ -22,7 +22,7 @@ public class StringManager {
                 System.err.println("Could not find strings.properties in classpath");
             }
         } catch (Exception e) {
-            
+            e.printStackTrace();
         }
     }
     
