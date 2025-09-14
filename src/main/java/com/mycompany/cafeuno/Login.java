@@ -6,7 +6,8 @@ package com.mycompany.cafeuno;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.formdev.flatlaf.util.SystemInfo;
-import com.mycompany.cafeuno.utilities.StringManager;
+import modules.FontLoader;
+import utilities.StringManager;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -32,18 +33,18 @@ public class Login extends JFrame{
     
     private JPanel headerPanel;
     private Point mouseClickPoint;
-    private JLabel title;
-    private JTextField username;
-    private JPasswordField userPassword;
-    private JButton login;
+    private JLabel usernameLabel, passwordLabel;
+    private JTextField usernameField;
+    private JPasswordField passwordField;
+    private JButton loginButton;
     
     public Login() {
         try {
             UIManager.setLookAndFeel(new FlatMacLightLaf());
             UIManager.put("TextComponent.arc", 15);
             UIManager.put("Button.arc", 999);
-            UIManager.put("Component.focusedBorderColor", new Color(201, 40, 89));
-            UIManager.put("Component.focusColor", new Color(201, 40, 89, 80));
+            UIManager.put("Component.focusedBorderColor", new Color(34, 35, 38));
+            UIManager.put("Component.focusColor", new Color(34, 35, 38, 80));
             
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
@@ -56,13 +57,48 @@ public class Login extends JFrame{
     }
     
     private void initComponents() {
+        FontLoader fl = new FontLoader();
+
         JPanel imagePanel = new ImagePanel("src/main/resources/images/cafe-login-image.jpg");
         JPanel titleImagePanel = new ImagePanel("src/main/resources/images/cafe-uno-title-image.png");
-        
+
+        usernameLabel = new JLabel(StringManager.get("username.label"));
+        usernameField = new JTextField();
+
+        passwordLabel = new JLabel(StringManager.get("password.label"));
+        passwordField = new JPasswordField();
+
+        loginButton = new JButton(StringManager.get("login.label"));
+
+        // Set fonts
+        usernameLabel.setFont(fl.loadHintFont(16f));
+        usernameField.setFont(fl.loadTextFont(14f));
+
+        passwordLabel.setFont(fl.loadHintFont(16f));
+        passwordField.setFont(fl.loadTextFont(14f));
+
+        loginButton.setFont(fl.loadButtonFont(18f));
+
+        // Set colors
+        loginButton.setForeground(Color.white);
+        loginButton.setBackground(new Color(34, 35, 38));
+
+        // Set bounds
         imagePanel.setBounds(0, 0, 540, 550);
         titleImagePanel.setBounds(620, 100, 210, 90);
-        
+
+        usernameLabel.setBounds(620, 230, 100, 20);
+        usernameField.setBounds(615, 230+25, 225, 40);
+
+        passwordLabel.setBounds(620, 230+25+55, 100, 20);
+        passwordField.setBounds(615, 230+25+55+25, 225, 40);
+
+        loginButton.setBounds(621, 230+25+55+25+70, 210, 50);
+        // Add components
         add(imagePanel); add(titleImagePanel);
+        add(usernameLabel); add(usernameField);
+        add(passwordLabel); add(passwordField);
+        add(loginButton);
     }
     
     private void setupFrame() {
