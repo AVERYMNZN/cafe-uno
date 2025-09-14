@@ -6,24 +6,17 @@ package com.mycompany.cafeuno;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.formdev.flatlaf.util.SystemInfo;
+import components.CustomRoundButton;
 import modules.FontLoader;
-import utilities.StringManager;
-import java.awt.Color;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.RoundRectangle2D;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.*;
+
 import modules.ImagePanel;
+import modules.StringManager;
 
 /**
  *
@@ -33,10 +26,11 @@ public class Login extends JFrame{
     
     private JPanel headerPanel;
     private Point mouseClickPoint;
-    private JLabel usernameLabel, passwordLabel;
+    private JLabel usernameLabel, passwordLabel, loginWithLabel;
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
+    private CustomRoundButton googleLoginButton;
     
     public Login() {
         try {
@@ -70,6 +64,11 @@ public class Login extends JFrame{
 
         loginButton = new JButton(StringManager.get("login.label"));
 
+        loginWithLabel = new JLabel(StringManager.get("loginWith.label"));
+
+        googleLoginButton = new CustomRoundButton(StringManager.get("googleLogin.label"), new ImageIcon(new ImageIcon("src/main/resources/images/search.png")
+                .getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
+
         // Set fonts
         usernameLabel.setFont(fl.loadHintFont(16f));
         usernameField.setFont(fl.loadTextFont(14f));
@@ -79,26 +78,34 @@ public class Login extends JFrame{
 
         loginButton.setFont(fl.loadButtonFont(18f));
 
+        loginWithLabel.setFont(fl.loadHintFont(12f));
+
+        googleLoginButton.setFont(fl.loadButtonFont(16f));
         // Set colors
         loginButton.setForeground(Color.white);
         loginButton.setBackground(new Color(34, 35, 38));
 
         // Set bounds
         imagePanel.setBounds(0, 0, 540, 550);
-        titleImagePanel.setBounds(620, 100, 210, 90);
+        titleImagePanel.setBounds(620, 60, 210, 90);
 
-        usernameLabel.setBounds(620, 230, 100, 20);
-        usernameField.setBounds(615, 230+25, 225, 40);
+        usernameLabel.setBounds(620, 190, 100, 20);
+        usernameField.setBounds(615, 190+25, 225, 40);
 
-        passwordLabel.setBounds(620, 230+25+55, 100, 20);
-        passwordField.setBounds(615, 230+25+55+25, 225, 40);
+        passwordLabel.setBounds(620, 190+25+55, 100, 20);
+        passwordField.setBounds(615, 190+25+55+25, 225, 40);
 
-        loginButton.setBounds(621, 230+25+55+25+70, 210, 50);
+        loginButton.setBounds(621, 190+25+55+25+70, 210, 50);
+
+        loginWithLabel.setBounds(697, 190+25+55+25+70+90, 100, 20);
+        googleLoginButton.setBounds(621, 190+25+55+25+70+60, 210, 50);
         // Add components
         add(imagePanel); add(titleImagePanel);
         add(usernameLabel); add(usernameField);
         add(passwordLabel); add(passwordField);
         add(loginButton);
+//        add(loginWithLabel);
+        add(googleLoginButton);
     }
     
     private void setupFrame() {
