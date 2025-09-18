@@ -18,6 +18,7 @@ import javax.swing.*;
 
 import modules.ImagePanel;
 import modules.StringManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,6 +27,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Login extends JFrame{
+    private FontLoader fontloader;
+    private StringManager stringManager;
+
     
     private JPanel headerPanel;
     private Point mouseClickPoint;
@@ -35,17 +39,14 @@ public class Login extends JFrame{
     private JButton loginButton;
     private CustomRoundButton googleLoginButton;
     
-    public Login() {
+    public Login(FontLoader fontloader, StringManager stringManager) {
+        this.fontloader = fontloader;
+        this.stringManager = stringManager;
+        setLookAndFeel();
+        setupFrame();
+        initComponents();
     }
 
-    private void initialize() {
-        SwingUtilities.invokeLater(() -> {
-            setLookAndFeel();
-            setupFrame();
-            initComponents();
-
-        });
-    }
 
     private void setLookAndFeel() {
         try {
@@ -61,7 +62,7 @@ public class Login extends JFrame{
     }
     
     private void initComponents() {
-        FontLoader fl = new FontLoader();
+
 
         JPanel imagePanel = new ImagePanel("src/main/resources/images/cafe-login-image.jpg");
         JPanel titleImagePanel = new ImagePanel("src/main/resources/images/cafe-uno-title-image.png");
@@ -80,17 +81,17 @@ public class Login extends JFrame{
                 .getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
 
         // Set fonts
-        usernameLabel.setFont(fl.loadHintFont(16f));
-        usernameField.setFont(fl.loadTextFont(14f));
+        usernameLabel.setFont(fontloader.loadHintFont(16f));
+        usernameField.setFont(fontloader.loadTextFont(14f));
 
-        passwordLabel.setFont(fl.loadHintFont(16f));
-        passwordField.setFont(fl.loadTextFont(14f));
+        passwordLabel.setFont(fontloader.loadHintFont(16f));
+        passwordField.setFont(fontloader.loadTextFont(14f));
 
-        loginButton.setFont(fl.loadButtonFont(18f));
+        loginButton.setFont(fontloader.loadButtonFont(18f));
 
-        loginWithLabel.setFont(fl.loadHintFont(12f));
+        loginWithLabel.setFont(fontloader.loadHintFont(12f));
 
-        googleLoginButton.setFont(fl.loadButtonFont(16f));
+        googleLoginButton.setFont(fontloader.loadButtonFont(16f));
         // Set colors
         loginButton.setForeground(Color.white);
         loginButton.setBackground(new Color(34, 35, 38));
