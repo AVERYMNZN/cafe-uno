@@ -13,15 +13,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.RoundRectangle2D;
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 
 import modules.ImagePanel;
 import modules.StringManager;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author avery
  */
+@Component
 public class Login extends JFrame{
     
     private JPanel headerPanel;
@@ -33,21 +36,28 @@ public class Login extends JFrame{
     private CustomRoundButton googleLoginButton;
     
     public Login() {
+    }
+
+    private void initialize() {
+        SwingUtilities.invokeLater(() -> {
+            setLookAndFeel();
+            setupFrame();
+            initComponents();
+
+        });
+    }
+
+    private void setLookAndFeel() {
         try {
             UIManager.setLookAndFeel(new FlatMacLightLaf());
             UIManager.put("TextComponent.arc", 15);
             UIManager.put("Button.arc", 999);
             UIManager.put("Component.focusedBorderColor", new Color(34, 35, 38));
             UIManager.put("Component.focusColor", new Color(34, 35, 38, 80));
-            
+
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        
-        SwingUtilities.invokeLater(() -> {
-            setupFrame();
-            initComponents();
-        });
     }
     
     private void initComponents() {
@@ -129,10 +139,7 @@ public class Login extends JFrame{
         headerPanel.setOpaque(false);
         setupWindowDragging();
         add(headerPanel);
-        
 
-        
-        setVisible(true);
     }
     
     @Override

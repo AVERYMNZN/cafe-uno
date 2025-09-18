@@ -4,6 +4,12 @@
 
 package com.mycompany.cafeuno;
 
+import appconfig.AppConfig;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import javax.swing.*;
+
 /**
  *
  * @author avery
@@ -11,6 +17,10 @@ package com.mycompany.cafeuno;
 public class CafeUno {
 
     public static void main(String[] args) {
-        Login login = new Login();
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+
+
+        Login login = context.getBean(Login.class);
+
     }
-}
+;}
