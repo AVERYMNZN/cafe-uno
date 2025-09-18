@@ -4,6 +4,8 @@
  */
 package modules;
 
+import org.springframework.stereotype.Component;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -19,7 +21,6 @@ import javax.swing.JPanel;
  */
 public class ImagePanel extends JPanel{
     private BufferedImage image;
-    
     public ImagePanel(String source) {
         try {
             image = ImageIO.read(new File(source));

@@ -4,6 +4,8 @@
  */
 package modules;
 
+import org.springframework.stereotype.Component;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -12,6 +14,7 @@ import java.util.Properties;
  *
  * @author avery
  */
+@Component
 public class StringManager {
     private static final Properties props = new Properties();
     

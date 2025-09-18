@@ -20,7 +20,9 @@ public class CafeUno {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
 
-        Login login = context.getBean(Login.class);
-
+        SwingUtilities.invokeLater(() -> {
+            Login login = context.getBean(Login.class);
+            login.setVisible(true);
+        });
     }
-;}
+}

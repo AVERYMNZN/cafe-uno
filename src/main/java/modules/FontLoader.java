@@ -8,12 +8,15 @@ package modules;
  *
  * @author avery
  */
+import org.springframework.stereotype.Component;
+
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class FontLoader {
     private static final Map<String, Font> cache = new HashMap<>();
     
